@@ -51,17 +51,38 @@ class SearchResult(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def parse_name_bangla(self):
-        return self.get_element_text(self.NAME_BANGLA)
+    @staticmethod
+    def __is_blank(value):
+        if value == "":
+            return True
+        return False
 
-    def parse_name_english(self):
-        return self.get_element_text(self.NAME_ENGLISH)
+    def _parse_name_bangla(self):
+        val = self.get_element_text(self.NAME_BANGLA)
+        if self.__is_blank(val):
+            return None
+        return val
 
-    def parse_father_name(self):
-        return self.get_element_text(self.FATHER_NAME)
+    def _parse_name_english(self):
+        val = self.get_element_text(self.NAME_ENGLISH)
+        if self.__is_blank(val):
+            return None
+        return val
 
-    def parse_mother_name(self):
-        return self.get_element_text(self.MOTHER_NAME)
+    def _parse_father_name(self):
+        val = self.get_element_text(self.FATHER_NAME)
+        if self.__is_blank(val):
+            return None
+        return val
+
+    def _parse_mother_name(self):
+        val = self.get_element_text(self.MOTHER_NAME)
+        if self.__is_blank(val):
+            return None
+        return val
+
+    def parse_basic_info(self):
+        pass
 
     def parse_present_address(self):
         pass

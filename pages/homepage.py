@@ -3,7 +3,7 @@ from .basepage import BasePage
 
 
 class HomePage(BasePage):
-    ID_VERIFICATION_BTN = (By.ID, "DUMMID")
+    ID_VERIFICATION_BTN = (By.ID, "verificationImg")
 
     def __init__(self, driver):
         super().__init__(driver)

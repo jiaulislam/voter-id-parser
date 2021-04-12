@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class SearchResult(BasePage):
     # Names, Occupation, Blood-Group, National ID, Pin
     NAME_BANGLA = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[2]")
-    NAME_ENGLISH = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[4]")
+    NAME_ENGLISH= (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[4]")
     FATHER_NAME = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[8]")
     MOTHER_NAME = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[10]")
     SPOUSE_NAME = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[12]")
@@ -62,3 +62,9 @@ class SearchResult(BasePage):
 
     def parse_mother_name(self):
         return self.get_element_text(self.MOTHER_NAME)
+
+    def parse_present_address(self):
+        pass
+
+    def parse_permenent_address(self):
+        pass

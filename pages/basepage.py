@@ -38,8 +38,8 @@ class BasePage(object):
 
     def get_element_text(self, by_locator):
         try:
-            element = WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator)).get_attribute("value")
+            element = WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator))
         except TimeoutException as e:
             print(e)
         else:
-            return element
+            return element.text

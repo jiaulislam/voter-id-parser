@@ -2,6 +2,10 @@ from .basepage import BasePage
 from selenium.webdriver.common.by import By
 
 class SearchResult(BasePage):
+    """
+        Child class of BasePage class. This class is exclusivly responsible
+        for parsing all the NID holder information.
+    """
     # Names, Occupation, Blood-Group, National ID, Pin
     BASIC_INFO = {
         "NAME_BANGLA" : (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[2]"),
@@ -15,7 +19,6 @@ class SearchResult(BasePage):
         "NATIONAL_ID" : (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[22]"),
         "PIN"         : (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[24]")
     }
-
 
     # PRESENT ADDRESS SECTION
     PRESENT_ADDRESS = {
@@ -59,12 +62,20 @@ class SearchResult(BasePage):
         super().__init__(driver)
 
     @staticmethod
-    def __is_blank(value):
+    def __is_blank(value) -> bool:
+        """
+        A static method don't depend on the class. Just a simple method to 
+        do the string verification
+        """
         if value == "":
             return True
         return False
 
-    def _parse_basic_info(self):
+    def _parse_basic_info(self) -> dict:
+        """
+        Private method
+        returns a dictionary with the basic information.
+        """
         basic_info = {}
         for key, *selector in self.BASIC_INFO.items():
             parsed_data =self.get_element_text(*selector)
@@ -73,7 +84,11 @@ class SearchResult(BasePage):
             basic_info[key] = parsed_data
         return basic_info
 
-    def _parse_present_address(self):
+    def _parse_present_address(self) -> list:
+        """
+        Private method
+        returns a list of dictionaries with all the present address information
+        """
         present_address_data = []
         for header, *selector in self.PRESENT_ADDRESS.items():
             parsed_data = self.get_element_text(*selector)
@@ -83,7 +98,11 @@ class SearchResult(BasePage):
 
         return present_address_data
 
-    def _parse_permenent_address(self):
+    def _parse_permenent_address(self) -> list:
+        """
+        Private method
+        return a list of dictionaries with all the permenent address information
+        """
         permenent_address_data = []
         for header, *selector in self.PERMENENT_ADDRESS.items():
             parsed_data = self.get_element_text(*selector)
@@ -92,13 +111,22 @@ class SearchResult(BasePage):
             permenent_address_data.append({header : parsed_data})
         return permenent_address_data
 
-    def parse_basic_info(self):
+    def parse_basic_info(self) -> dict:
+        """
+        Callable method to get the Basic information of the NID Holder
+        """
         return self._parse_basic_info()
 
 
-    def parse_present_address(self):
+    def parse_present_address(self) -> list:
+        """
+        Callable method to get the present address information of the NID Holder
+        """
         return self._parse_present_address()
 
-    def parse_permenent_address(self):
+    def parse_permenent_address(self) -> list:
+        """
+        Callable method to get the permenent address information of the NID holder
+        """
         return self._parse_permenent_address()
 

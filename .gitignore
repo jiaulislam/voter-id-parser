@@ -135,3 +135,5 @@ Lib/
 Scripts/
 geckodriver.log
 pyvenv.cfg
+*.json
+*.txt

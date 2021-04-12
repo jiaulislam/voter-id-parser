@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from base impor BasePage
+from .basepage import BasePage
 
 class SearchPage(BasePage):
     NID_TEXT = (By.ID, "nidVoterInput")
@@ -11,7 +11,7 @@ class SearchPage(BasePage):
         super().__init__(driver)
 
     def insert_NID_number(self, nid_number):
-        self.find_element(*NID_TEXT).clear()
+        self.find_element(*self.NID_TEXT).clear()
         self.write(self.NID_TEXT, nid_number)
 
     def insert_dob(self, date_of_birth):
@@ -19,6 +19,7 @@ class SearchPage(BasePage):
         self.write(self.DOB_TEXT, date_of_birth)
 
     def click_search_btn(self):
-        self.click(SEARCH_BTN)
+        self.click(self.SEARCH_BTN)
 
     def is_search_successful(self):
+        pass

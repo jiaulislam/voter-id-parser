@@ -7,7 +7,7 @@ import json
 
 URL = "C:\\Users\\Jibon\\Desktop\\JJ\\Verify By Nid.htm"
 
-def parse(driver=None):
+def nid_parser(driver):
     page = SearchResult(driver)
     basic_info = page.parse_basic_info()
     present_address = page.parse_present_address()
@@ -31,10 +31,16 @@ if __name__=="__main__":
 
 
     ########## EXPORT #############
-    all_information = parse(driver)
+    all_information = nid_parser(driver)
     # To export JSON file
     with open("parsed_data.json", "w") as json_file:
         writer = json.dumps(all_information, indent=4)
         json_file.writelines(writer)
+
+    # To Read JSON file
+    with open('parsed_data.json', "r") as read_json:
+        data = json.loads(read_json.read())
+        for i,v in data.items():
+            print(i, "->", v)
 
     driver.quit()

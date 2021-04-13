@@ -1,4 +1,4 @@
-
+from post import post_request as pq
 from jsonify import jasonify_data as js
 import static_data as sd
 import actions
@@ -18,6 +18,7 @@ def main():
     js.make_json_file(parsed_data)
     js.read_json_file()
     actions.ExitBrowser(browser)
+    print(pq.post_data(sd.STATIC_DATA['POST_URL'], parsed_data)) # do post reqeust 
     print("Json File Exported Successfully")
 
 

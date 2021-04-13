@@ -9,9 +9,15 @@ will print json post status code as return
 """
 
 def post_data(url, json_value):
+    """
+    Post the data to shared URL/API with provided JSON data.
+
+    return STATUS_CODE<201> if success else exception with STATUS_CODE
+    """
     try:
         request = requests.post(url, json=json_value)
     except Exception as e:
-        sys.exit(e)
+        print(e)
+        sys.exit(f"STATUS<{request.status_code}>)
     else:
         return f"STATUS<{request.status_code}>"

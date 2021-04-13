@@ -80,6 +80,6 @@ def Parse_Search_Result(Browser) -> dict:
     result = parser.parse_basic_info()
     present_address = parser.parse_present_address()
     permenent_address = parser.parse_permenent_address()
-    result['PRESENT_ADDRESS'] = present_address
-    result['PERMENENT_ADDRESS'] = permenent_address
+    result['Present Address'] = present_address
+    result['Permanent Address'] = permenent_address
     return result

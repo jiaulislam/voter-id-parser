@@ -18,6 +18,6 @@ def post_data(url, json_value):
         request = requests.post(url, json=json_value)
     except Exception as e:
         print(e)
-        sys.exit(f"STATUS<{request.status_code}>)
+        sys.exit(f"STATUS<{request.status_code}>")
     else:
         return f"STATUS<{request.status_code}>"

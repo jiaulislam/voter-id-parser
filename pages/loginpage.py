@@ -11,21 +11,21 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def insert_username(self, username):
+    def insert_username(self, username) -> None:
         """
         Insert the username to login to account
         """
         self.find_element(*self.USERNAME).clear()
         self.write(self.USERNAME, username)
 
-    def insert_password(self, password):
+    def insert_password(self, password) -> None:
         """
         Insert the password to login to account
         """
         self.find_element(*self.PASSWORD).clear()
         self.write(self.PASSWORD, password)
 
-    def click_login_btn(self):
+    def click_login_btn(self) -> None:
         """
         Submit the post to request with click action
         """

@@ -18,14 +18,14 @@ class SearchPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def insert_NID_number(self, nid_number):
+    def insert_NID_number(self, nid_number) -> None:
         """
         Insert the NID number for query
         """
         self.find_element(*self.NID_TEXT).clear()
         self.write(self.NID_TEXT, nid_number)
 
-    def insert_dob(self, date_of_birth):
+    def insert_dob(self, date_of_birth) -> None:
         """
         Insert the Date of birth for query.
 
@@ -40,13 +40,13 @@ class SearchPage(BasePage):
         else:
             self.driver.execute_script(code)
 
-    def click_search_btn(self):
+    def click_search_btn(self) -> None:
         """
         Click on the search button after the DOB & NID has been given
         """
         self.click(self.SEARCH_BTN)
 
-    def is_search_successful(self):
+    def is_search_successful(self) -> bool:
         """
         A edge case need to handle when a NID is not found in that case return False else True
         """

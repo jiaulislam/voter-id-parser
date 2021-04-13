@@ -89,12 +89,12 @@ class SearchResult(BasePage):
         Private method
         returns a list of dictionaries with all the present address information
         """
-        present_address_data = []
+        present_address_data = {}
         for header, *selector in self.PRESENT_ADDRESS.items():
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
-            present_address_data.append({header : parsed_data})
+            present_address_data[header] = parsed_data
 
         return present_address_data
 
@@ -103,12 +103,12 @@ class SearchResult(BasePage):
         Private method
         return a list of dictionaries with all the permenent address information
         """
-        permenent_address_data = []
+        permenent_address_data = {}
         for header, *selector in self.PERMENENT_ADDRESS.items():
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
-            permenent_address_data.append({header : parsed_data})
+            permenent_address_data[header] = parsed_data
         return permenent_address_data
 
     def parse_basic_info(self) -> dict:

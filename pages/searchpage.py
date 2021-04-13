@@ -51,7 +51,7 @@ class SearchPage(BasePage):
         A edge case need to handle when a NID is not found in that case return False else True
         """
         try:
-            WebDriverWait(self.driver, self.timeout).until(EC.element_to_be_visible(self.EDGE_CASE))
+            WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(self.EDGE_CASE))
         except TimeoutException:
             return False
         else:

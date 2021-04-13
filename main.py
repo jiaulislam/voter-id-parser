@@ -17,6 +17,8 @@ def main():
     parsed_data = actions.Parse_Search_Result(browser)
     js.make_json_file(parsed_data)
     js.read_json_file()
+    actions.ExitBrowser(browser)
+    print("Json File Exported Successfully")
 
 
 if __name__=="__main__":

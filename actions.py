@@ -37,7 +37,7 @@ def DoLogin(Browser) -> None:
     Login to the Website
     """
     login_page = LoginPage(Browser)
-    login_page.insert_user_name(sd.STATIC_DATA['USERNAME'])
+    login_page.insert_username(sd.STATIC_DATA['USERNAME'])
     login_page.insert_password(sd.STATIC_DATA['PASSWORD'])
     login_page.click_login_btn()
 

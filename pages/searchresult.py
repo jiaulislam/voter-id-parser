@@ -84,7 +84,7 @@ class SearchResult(BasePage):
             basic_info[key] = parsed_data
         return basic_info
 
-    def _parse_present_address(self) -> list:
+    def _parse_present_address(self) -> dict:
         """
         Private method
         returns a dictionaries with all the present address information
@@ -98,7 +98,7 @@ class SearchResult(BasePage):
 
         return present_address_data
 
-    def _parse_permenent_address(self) -> list:
+    def _parse_permenent_address(self) -> dict:
         """
         Private method
         return a dictionaries with all the permenent address information
@@ -118,13 +118,13 @@ class SearchResult(BasePage):
         return self._parse_basic_info()
 
 
-    def parse_present_address(self) -> list:
+    def parse_present_address(self) -> dict:
         """
         Callable method to get the present address information of the NID Holder
         """
         return self._parse_present_address()
 
-    def parse_permenent_address(self) -> list:
+    def parse_permenent_address(self) -> dict:
         """
         Callable method to get the permenent address information of the NID holder
         """

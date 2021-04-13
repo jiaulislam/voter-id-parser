@@ -17,6 +17,9 @@ class BasePage(object):
         self.timeout = timeout
     
     def find_element(self, *by_locator):
+        """
+        Find an element in the DOM Tree
+        """
         try:
             return self.driver.find_element(*by_locator)
         except ValueError as e:
@@ -25,18 +28,27 @@ class BasePage(object):
             print(e)
 
     def click(self, by_locator):
+        """
+        Click an element on the DOM Tree
+        """
         try:
             WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator)).click()
         except AttributeError as e:
             print(e)
 
     def write(self, by_locator, text_to_write):
+        """
+        Write to an element on the DOM Tree
+        """
         try:
             WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator)).send_keys(text_to_write)
         except TimeoutException as e:
             print(e)
 
     def get_element_text(self, by_locator):
+        """
+        Retrive the 'VALUE' from an element of DOM Tree
+        """
         try:
             element = WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator))
         except TimeoutException as e:

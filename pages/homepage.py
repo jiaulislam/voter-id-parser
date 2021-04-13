@@ -10,4 +10,7 @@ class HomePage(BasePage):
 
 
     def click_id_verification(self):
+        """
+        Click on the ID Verification Menu button on DOM Tree
+        """
         self.click(self.ID_VERIFICATION_BTN)

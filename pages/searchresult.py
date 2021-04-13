@@ -87,7 +87,7 @@ class SearchResult(BasePage):
     def _parse_present_address(self) -> list:
         """
         Private method
-        returns a list of dictionaries with all the present address information
+        returns a dictionaries with all the present address information
         """
         present_address_data = {}
         for header, *selector in self.PRESENT_ADDRESS.items():
@@ -101,7 +101,7 @@ class SearchResult(BasePage):
     def _parse_permenent_address(self) -> list:
         """
         Private method
-        return a list of dictionaries with all the permenent address information
+        return a dictionaries with all the permenent address information
         """
         permenent_address_data = {}
         for header, *selector in self.PERMENENT_ADDRESS.items():

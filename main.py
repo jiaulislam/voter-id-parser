@@ -4,23 +4,19 @@ import static_data as sd
 import actions
 
 
-def main():
+def run(nid, dob):
     """
     Combined all actions
     """
-    nid_number, dob = actions.take_arguments()
     browser = actions.OpenBrowser()
     actions.OpenURL(browser, sd.STATIC_DATA['URL'])
-    actions.DoLogin(browser)
-    actions.GotoNIDVerification(browser)
-    actions.DoSearch(browser, nid_number, dob)
+    # actions.DoLogin(browser)
+    # actions.GotoNIDVerification(browser)
+    # actions.DoSearch(browser, nid_number, dob)
     parsed_data = actions.Parse_Search_Result(browser)
     js.make_json_file(parsed_data)
-    js.read_json_file()
     actions.ExitBrowser(browser)
-    print(pq.post_data(sd.STATIC_DATA['POST_URL'], parsed_data)) # do post reqeust 
-    print("Json File Exported Successfully")
+    return f"{js.read_json_file()}"
+    # js.read_json_file()
+    # print(pq.post_data(sd.STATIC_DATA['POST_URL'], parsed_data)) # do post reqeust 
 
-
-if __name__=="__main__":
-    main()

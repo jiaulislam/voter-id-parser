@@ -25,7 +25,7 @@ def _check_for_valid_NID(nid_number) -> bool:
     """
     Check if the ID numbe provided by user is Valid or Not
     """
-    if len(nid_number) < 17 and nid_number.isnumeric():
+    if len(nid_number) <= 17 and nid_number.isnumeric():
         return True
     return False
 

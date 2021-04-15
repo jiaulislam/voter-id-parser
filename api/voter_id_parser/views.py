@@ -17,9 +17,15 @@ def search(request):
             json = __make_query(nid, dob)
             return HttpResponse(json, content_type="application/json")
     else:
-        form = RequestForm()
-        context = {
-            'title': "Search NID",
-            'form': form
-        }
-        return render(request, 'voter_id_parser/search.html', context)
+        if request.GET.get('nid') and request.GET.get('dob'):
+            nid = request.GET.get('nid')
+            dob = request.GET.get('dob')
+            json = __make_query(nid, dob)
+            return HttpResponse(json, content_type="application/json")
+        else:
+            form = RequestForm()
+            context = {
+                'title': "Search NID",
+                'form': form
+            }
+            return render(request, 'voter_id_parser/search.html', context)

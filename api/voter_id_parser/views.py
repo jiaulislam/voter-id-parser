@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from subprocess import run, PIPE
 from .forms import RequestForm
 import main
-import sys
 
 
 def __make_query(nid, dob):

@@ -4,7 +4,7 @@ from pages.loginpage  import LoginPage
 from pages.homepage import HomePage
 from pages.searchpage import SearchPage
 from pages.searchresult import SearchResult
-import static_data as sd
+import static_data as SD
 import sys
 
 def OpenBrowser() -> webdriver:
@@ -13,7 +13,7 @@ def OpenBrowser() -> webdriver:
     """
     options = Options()
     options.add_argument("--headless")
-    return webdriver.Firefox(firefox_options=options, executable_path=sd.STATIC_DATA["PATH"])
+    return webdriver.Firefox(firefox_options=options, executable_path=SD.STATIC_DATA["PATH"])
 
 def OpenURL(Browser, URL) -> None:
     """
@@ -40,8 +40,8 @@ def DoLogin(Browser) -> None:
     Login to the Website
     """
     login_page = LoginPage(Browser)
-    login_page.insert_username(sd.STATIC_DATA['USERNAME'])
-    login_page.insert_password(sd.STATIC_DATA['PASSWORD'])
+    login_page.insert_username(SD.STATIC_DATA['USERNAME'])
+    login_page.insert_password(SD.STATIC_DATA['PASSWORD'])
     login_page.click_login_btn()
 
 def GotoNIDVerification(Browser) -> None:

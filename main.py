@@ -14,9 +14,10 @@ def run(nid, dob):
     # actions.GotoNIDVerification(browser)
     # actions.DoSearch(browser, nid_number, dob)
     parsed_data = actions.Parse_Search_Result(browser)
-    js.make_json_file(parsed_data)
+    # js.make_json_file(parsed_data)
     actions.ExitBrowser(browser)
-    return f"{js.read_json_file()}"
+    return js.read_json_file(parsed_data)
+    # return f"{js.read_json_file()}"
     # js.read_json_file()
     # print(pq.post_data(sd.STATIC_DATA['POST_URL'], parsed_data)) # do post reqeust 
 

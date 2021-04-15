@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from pages.loginpage  import LoginPage
 from pages.homepage import HomePage
 from pages.searchpage import SearchPage
@@ -10,7 +11,9 @@ def OpenBrowser() -> webdriver:
     """
     Return a webdriver object with FireFox browser
     """
-    return webdriver.Firefox(executable_path=sd.STATIC_DATA["PATH"])
+    options = Options()
+    options.add_argument("--headless")
+    return webdriver.Firefox(firefox_options=options, executable_path=sd.STATIC_DATA["PATH"])
 
 def OpenURL(Browser, URL) -> None:
     """

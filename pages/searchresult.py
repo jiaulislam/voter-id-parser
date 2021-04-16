@@ -5,7 +5,7 @@ from .basepage import BasePage
 
 class SearchResult(BasePage):
     """
-        Child class of BasePage class. This class is exclusivly responsible
+        Child class of BasePage class. This class is exclusively responsible
         for parsing all the NID holder information.
     """
     # Names, Occupation, Blood-Group, National ID, Pin
@@ -42,8 +42,8 @@ class SearchResult(BasePage):
         "Region": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[16]/div/div[30]")
     }
 
-    # PERMENENT ADDRESS
-    PERMENENT_ADDRESS = {
+    # PERMANENT ADDRESS
+    PERMANENT_ADDRESS = {
         "Division": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[2]"),
         "District": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[4]"),
         "RMO": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[6]"),
@@ -102,18 +102,18 @@ class SearchResult(BasePage):
 
         return present_address_data
 
-    def _parse_permenent_address(self) -> dict:
+    def _parse_permanent_address(self) -> dict:
         """
         Private method
-        return a dictionaries with all the permenent address information
+        return a dictionaries with all the permanent address information
         """
-        permenent_address_data = {}
-        for header, *selector in self.PERMENENT_ADDRESS.items():
+        permanent_address_data = {}
+        for header, *selector in self.PERMANENT_ADDRESS.items():
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
-            permenent_address_data[header] = parsed_data
-        return permenent_address_data
+            permanent_address_data[header] = parsed_data
+        return permanent_address_data
 
     def parse_basic_info(self) -> dict:
         """
@@ -127,8 +127,8 @@ class SearchResult(BasePage):
         """
         return self._parse_present_address()
 
-    def parse_permenent_address(self) -> dict:
+    def parse_permanent_address(self) -> dict:
         """
-        Callable method to get the permenent address information of the NID holder
+        Callable method to get the permanent address information of the NID holder
         """
-        return self._parse_permenent_address()
+        return self._parse_permanent_address()

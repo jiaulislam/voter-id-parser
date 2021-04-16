@@ -1,11 +1,14 @@
+import sys
+
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-from pages.loginpage  import LoginPage
+
+import static_data as SD
 from pages.homepage import HomePage
+from pages.loginpage import LoginPage
 from pages.searchpage import SearchPage
 from pages.searchresult import SearchResult
-import static_data as SD
-import sys
+
 
 def OpenBrowser() -> webdriver:
     """
@@ -15,25 +18,29 @@ def OpenBrowser() -> webdriver:
     options.add_argument("--headless")
     return webdriver.Firefox(firefox_options=options, executable_path=SD.STATIC_DATA["PATH"])
 
+
 def OpenURL(Browser, URL) -> None:
     """
     Open the URL in Browser
     """
     Browser.get(URL)
 
+
 def _check_for_valid_NID(nid_number) -> bool:
     """
-    Check if the ID numbe provided by user is Valid or Not
+    Check if the ID number provided by user is Valid or Not
     """
     if len(nid_number) <= 17 and nid_number.isnumeric():
         return True
     return False
+
 
 def ExitBrowser(Browser) -> None:
     """
     Exit out of the browser
     """
     Browser.quit()
+
 
 def DoLogin(Browser) -> None:
     """
@@ -43,6 +50,7 @@ def DoLogin(Browser) -> None:
     login_page.insert_username(SD.STATIC_DATA['USERNAME'])
     login_page.insert_password(SD.STATIC_DATA['PASSWORD'])
     login_page.click_login_btn()
+
 
 def GotoNIDVerification(Browser) -> None:
     """
@@ -63,17 +71,19 @@ def take_arguments() -> tuple:
         sys.exit("Invalid NID number !")
     return nid_number, dob
 
+
 def DoSearch(Browser, nid_number, dob) -> None:
     """
-    Search aciton for NID db
+    Search action for NID db
     """
     search_page = SearchPage(Browser)
     search_page.insert_NID_number(nid_number)
     search_page.insert_dob(dob)
     search_page.click_search_btn()
-    # exit out of program if search not successfull
+    # exit out of program if search not successful
     if not search_page.is_search_successful():
         sys.exit("NID Information Not Found !")
+
 
 def Parse_Search_Result(Browser) -> dict:
     """
@@ -82,7 +92,7 @@ def Parse_Search_Result(Browser) -> dict:
     parser = SearchResult(Browser)
     result = parser.parse_basic_info()
     present_address = parser.parse_present_address()
-    permenent_address = parser.parse_permenent_address()
+    permanent_address = parser.parse_permanent_address()
     result['Present Address'] = present_address
-    result['Permanent Address'] = permenent_address
+    result['Permanent Address'] = permanent_address
     return result

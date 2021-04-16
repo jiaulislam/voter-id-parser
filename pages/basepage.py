@@ -1,6 +1,6 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 """
 Module Name: base.py
@@ -11,11 +11,12 @@ pages
 
 """
 
+
 class BasePage(object):
     def __init__(self, driver, timeout=30):
         self.driver = driver
         self.timeout = timeout
-    
+
     def find_element(self, *by_locator):
         """
         Find an element in the DOM Tree
@@ -41,7 +42,8 @@ class BasePage(object):
         Write to an element on the DOM Tree
         """
         try:
-            WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator)).send_keys(text_to_write)
+            WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator)).send_keys(
+                text_to_write)
         except TimeoutException as e:
             print(e)
 

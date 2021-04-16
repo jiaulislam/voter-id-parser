@@ -12,7 +12,7 @@ def run(nid, dob):
     actions.OpenURL(browser, SD.STATIC_DATA['URL'])
     actions.DoLogin(browser)
     actions.GotoNIDVerification(browser)
-    actions.DoSearch(browser, nid_number, dob)
+    actions.DoSearch(browser, nid, dob)
     parsed_data = actions.Parse_Search_Result(browser)
     # js.make_json_file(parsed_data)
     actions.ExitBrowser(browser)

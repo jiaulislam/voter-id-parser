@@ -16,14 +16,20 @@ def OpenBrowser() -> webdriver:
     """
     options = Options()
     options.add_argument("--headless")
-    return webdriver.Firefox(firefox_options=options, executable_path=SD.STATIC_DATA["PATH"])
+    try:
+        return webdriver.Firefox(firefox_options=options, executable_path=SD.STATIC_DATA["PATH"])
+    except Exception as e:
+        sys.exit(e)
 
 
 def OpenURL(Browser, URL) -> None:
     """
     Open the URL in Browser
     """
-    Browser.get(URL)
+    try:
+        Browser.get(URL)
+    except Exception as e:
+        sys.exit(e)
 
 
 def _check_for_valid_NID(nid_number) -> bool:
@@ -39,7 +45,10 @@ def ExitBrowser(Browser) -> None:
     """
     Exit out of the browser
     """
-    Browser.quit()
+    try:
+        Browser.quit()
+    except Exception as e:
+        sys.exit(e)
 
 
 def DoLogin(Browser) -> None:

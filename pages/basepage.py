@@ -49,7 +49,7 @@ class BasePage(object):
 
     def get_element_text(self, by_locator):
         """
-        Retrive the 'VALUE' from an element of DOM Tree
+        Retrieve the 'VALUE' from an element of DOM Tree
         """
         try:
             element = WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(by_locator))

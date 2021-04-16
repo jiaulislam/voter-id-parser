@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import RequestForm
 import main
@@ -7,6 +7,7 @@ import main
 def __make_query(nid, dob):
     cus_output = main.run(nid, dob)
     return cus_output
+
 
 def search(request):
     if request.method == 'POST':

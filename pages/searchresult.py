@@ -75,60 +75,29 @@ class SearchResult(BasePage):
             return True
         return False
 
-    def _parse_basic_info(self) -> dict:
-        """
-        Private method
-        returns a dictionary with the basic information.
-        """
-        basic_info = {}
-        for key, *selector in self.BASIC_INFO.items():
+    def __parser(self, data: dict) -> dict:
+        information = {}
+        for key, *selector in data.items():
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
-            basic_info[key] = parsed_data
-        return basic_info
-
-    def _parse_present_address(self) -> dict:
-        """
-        Private method
-        returns a dictionaries with all the present address information
-        """
-        present_address_data = {}
-        for header, *selector in self.PRESENT_ADDRESS.items():
-            parsed_data = self.get_element_text(*selector)
-            if self.__is_blank(parsed_data):
-                parsed_data = None
-            present_address_data[header] = parsed_data
-
-        return present_address_data
-
-    def _parse_permanent_address(self) -> dict:
-        """
-        Private method
-        return a dictionaries with all the permanent address information
-        """
-        permanent_address_data = {}
-        for header, *selector in self.PERMANENT_ADDRESS.items():
-            parsed_data = self.get_element_text(*selector)
-            if self.__is_blank(parsed_data):
-                parsed_data = None
-            permanent_address_data[header] = parsed_data
-        return permanent_address_data
+            information[key] = parsed_data
+        return information
 
     def parse_basic_info(self) -> dict:
         """
         Callable method to get the Basic information of the NID Holder
         """
-        return self._parse_basic_info()
+        return self.__parser(self.BASIC_INFO)
 
     def parse_present_address(self) -> dict:
         """
         Callable method to get the present address information of the NID Holder
         """
-        return self._parse_present_address()
+        return self.__parser(self.PRESENT_ADDRESS)
 
     def parse_permanent_address(self) -> dict:
         """
         Callable method to get the permanent address information of the NID holder
         """
-        return self._parse_permanent_address()
+        return self.__parser(self.PERMANENT_ADDRESS)

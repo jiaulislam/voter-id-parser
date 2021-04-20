@@ -1,4 +1,4 @@
-import static_data as SD
+from static_data import STATIC_DATA
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from actions import OpenURL, DoLogin, GotoNIDVerification
@@ -20,7 +20,7 @@ class SingletonBrowser:
             pass
         else:
             SingletonBrowser.__instance = webdriver.Firefox(options=self.options,
-                                                            executable_path=SD.STATIC_DATA["PATH"])
-            OpenURL(SingletonBrowser.__instance, SD.STATIC_DATA["URL"])
+                                                            executable_path=STATIC_DATA["PATH"])
+            OpenURL(SingletonBrowser.__instance, STATIC_DATA["URL"])
             DoLogin(SingletonBrowser.__instance)
             GotoNIDVerification(SingletonBrowser.__instance)

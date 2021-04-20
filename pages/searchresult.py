@@ -86,7 +86,7 @@ class SearchResult(BasePage):
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
-            information[key] = parsed_data
+            information.update({key: parsed_data})
         return information
 
     def parse_basic_info(self) -> dict:

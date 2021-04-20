@@ -1,12 +1,11 @@
 import sys
 
-import static_data as SD
+from json_formatter.jsonify import export_json
 from pages.homepage import HomePage
 from pages.loginpage import LoginPage
 from pages.searchpage import SearchPage
 from pages.searchresult import SearchResult
-
-from jsonify import jasonify_data as Json
+from static_data import STATIC_DATA
 
 
 def OpenURL(Browser, URL) -> None:
@@ -43,8 +42,8 @@ def DoLogin(Browser) -> None:
     Login to the Website
     """
     login_page = LoginPage(Browser)
-    login_page.insert_username(SD.STATIC_DATA['USERNAME'])
-    login_page.insert_password(SD.STATIC_DATA['PASSWORD'])
+    login_page.insert_username(STATIC_DATA['USERNAME'])
+    login_page.insert_password(STATIC_DATA['PASSWORD'])
     login_page.click_login_btn()
 
 
@@ -81,24 +80,20 @@ def DoSearch(Browser, nid_number, dob) -> None:
         sys.exit("NID Information Not Found !")
 
 
-def Parse_Search_Result(Browser) -> dict:
+def ParseSearchResult(Browser) -> dict:
     """
     After Search successful parse the required information
     """
     parser = SearchResult(Browser)
-    result = parser.parse_basic_info()
-    present_address = parser.parse_present_address()
-    permanent_address = parser.parse_permanent_address()
-    result['Present Address'] = present_address
-    result['Permanent Address'] = permanent_address
-    return result
+    owner_info = parser.parse_basic_info()
+    owner_info.update({'Present Address': parser.parse_present_address()})
+    owner_info.update({'Permanent Address': parser.parse_permanent_address()})
+    return owner_info
 
 
-def SearchAction(browser, nid, dob):
+def SearchAction(browser, nid, dob) -> str:
     """
     Search the Shared NID
     """
     DoSearch(browser, nid, dob)
-    parsed_data = Parse_Search_Result(browser)
-    return Json.read_json_file(parsed_data)
-
+    return export_json(ParseSearchResult(browser))

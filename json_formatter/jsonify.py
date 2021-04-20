@@ -9,7 +9,7 @@ def make_json_file(parsed_data) -> None:
         json.dump(parsed_data, json_file, ensure_ascii=False, indent=4)
 
 
-def read_json_file(data):
+def export_json(data: dict) -> str:
     """
     Output the Json formatted object
     """

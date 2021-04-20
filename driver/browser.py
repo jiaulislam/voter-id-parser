@@ -22,5 +22,5 @@ class SingletonBrowser:
             SingletonBrowser.__instance = webdriver.Firefox(options=self.options,
                                                             executable_path=SD.STATIC_DATA["PATH"])
             OpenURL(SingletonBrowser.__instance, SD.STATIC_DATA["URL"])
-            DoLogin(SingletonBrowser.__instance)
-            GotoNIDVerification(SingletonBrowser.__instance)
+            # DoLogin(SingletonBrowser.__instance)
+            # GotoNIDVerification(SingletonBrowser.__instance)

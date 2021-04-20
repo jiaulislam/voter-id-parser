@@ -37,6 +37,7 @@ class SearchPage(BasePage):
         code = f"document.getElementById('dateOfBirth').setAttribute('value', '{date_of_birth}');"
         try:
             WebDriverWait(self.driver, self.timeout).until(EC.visibility_of_element_located(self.DOB_TEXT))
+            self.find_element(*self.DOB_TEXT).clear()
         except TimeoutException:
             return
         else:

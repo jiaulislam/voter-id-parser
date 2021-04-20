@@ -1,7 +1,7 @@
 import requests
 
 """
-module_name: post_reqeust.py
+module_name: post_request.py
 
 This module will help to post data as a json object and
 will print json post status code as return

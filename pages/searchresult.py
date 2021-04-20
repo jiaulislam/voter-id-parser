@@ -76,6 +76,11 @@ class SearchResult(BasePage):
         return False
 
     def __parser(self, data: dict) -> dict:
+        """
+        Return a parsed dictionary modeled data
+        :param data: dict
+        :return: dict: formatted data of NID Holder information
+        """
         information = {}
         for key, *selector in data.items():
             parsed_data = self.get_element_text(*selector)

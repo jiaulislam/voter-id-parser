@@ -1,25 +1,12 @@
 import sys
 
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-
 import static_data as SD
 from pages.homepage import HomePage
 from pages.loginpage import LoginPage
 from pages.searchpage import SearchPage
 from pages.searchresult import SearchResult
 
-
-def OpenBrowser() -> webdriver:
-    """
-    Return a webdriver object with FireFox browser
-    """
-    options = Options()
-    options.add_argument("--headless")
-    try:
-        return webdriver.Firefox(firefox_options=options, executable_path=SD.STATIC_DATA["PATH"])
-    except Exception as e:
-        sys.exit(e)
+from jsonify import jasonify_data as Json
 
 
 def OpenURL(Browser, URL) -> None:
@@ -105,3 +92,13 @@ def Parse_Search_Result(Browser) -> dict:
     result['Present Address'] = present_address
     result['Permanent Address'] = permanent_address
     return result
+
+
+def SearchAction(browser, nid, dob):
+    """
+    Search the Shared NID
+    """
+    DoSearch(browser, nid, dob)
+    parsed_data = Parse_Search_Result(browser)
+    return Json.read_json_file(parsed_data)
+

@@ -6,6 +6,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 """
 This module will initiate a bridge to work
 with existing instance of a Chrome Browser.
+Need to Create a session of a browser manually 
+by using CMD .
+Example:
+chrome.exe --remote-debugging-port=9999 --user-data-dir=< Can be any directory of your choice
 """
 
 BROWSER = "9999"  # set this to desired 4 digit port

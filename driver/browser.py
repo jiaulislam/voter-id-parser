@@ -1,26 +1,19 @@
-from static_data import STATIC_DATA
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from actions import OpenURL, DoLogin, GotoNIDVerification
+from selenium.webdriver.chrome.options import Options
+
+from webdriver_manager.chrome import ChromeDriverManager
+
+"""
+This module will initiate a bridge to work
+with existing instance of a Chrome Browser.
+"""
 
 
-class SingletonBrowser:
+def __remote_handler(port: str) -> Options:
     options = Options()
-    options.add_argument("--headless")
-    __instance = None
+    options.add_experimental_option("debuggerAddress", f"localhost:{port}")
+    return options
 
-    @staticmethod
-    def get_browser() -> webdriver:
-        if SingletonBrowser.__instance is None:
-            SingletonBrowser()
-        return SingletonBrowser.__instance
 
-    def __init__(self):
-        if SingletonBrowser.__instance is not None:
-            pass
-        else:
-            SingletonBrowser.__instance = webdriver.Firefox(options=self.options,
-                                                            executable_path=STATIC_DATA["PATH"])
-            OpenURL(SingletonBrowser.__instance, STATIC_DATA["URL"])
-            DoLogin(SingletonBrowser.__instance)
-            GotoNIDVerification(SingletonBrowser.__instance)
+def get_browser_window() -> webdriver:
+    return webdriver.Chrome(ChromeDriverManager().install(), options=__remote_handler('9999'))

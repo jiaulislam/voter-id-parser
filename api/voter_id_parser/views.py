@@ -12,13 +12,13 @@ def search(request):
         if form.is_valid():
             nid = form.cleaned_data['nid_number']
             dob = form.cleaned_data['date_of_birth']
-            json = SearchAction(settings.WEBDRIVER_WINDOW, nid, dob)
+            json = SearchAction(settings.DRIVER, nid, dob)
             return HttpResponse(json, content_type="application/json")
     else:
         if request.GET.get('nid') and request.GET.get('dob'):
             nid = request.GET.get('nid')
             dob = request.GET.get('dob')
-            json = SearchAction(settings.WEBDRIVER_WINDOW, nid, dob)
+            json = SearchAction(settings.DRIVER, nid, dob)
             return HttpResponse(json, content_type="application/json")
         else:
             form = RequestForm()

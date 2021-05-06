@@ -67,7 +67,7 @@ def take_arguments() -> tuple:
     return nid_number, dob
 
 
-def DoSearch(Browser, nid_number, dob) -> None:
+def DoSearch(Browser, nid_number, dob) -> bool:
     """
     Search action for NID db
     """
@@ -75,9 +75,9 @@ def DoSearch(Browser, nid_number, dob) -> None:
     search_page.insert_NID_number(nid_number)
     search_page.insert_dob(dob)
     search_page.click_search_btn()
-    # exit out of program if search not successful
     if not search_page.is_search_successful():
-        sys.exit("NID Information Not Found !")
+        return False
+    return True
 
 
 def ParseSearchResult(Browser) -> dict:
@@ -91,10 +91,13 @@ def ParseSearchResult(Browser) -> dict:
     return owner_info
 
 
-def SearchAction(browser, nid, dob) -> str:
+def SearchAction(browser, nid, dob) -> any:
     """
     Search the Shared NID
     """
     browser.refresh()
-    DoSearch(browser, nid, dob)
-    return export_json(ParseSearchResult(browser))
+    flag = DoSearch(browser, nid, dob)
+    if flag:
+        return export_json(ParseSearchResult(browser))
+    else:
+        return False

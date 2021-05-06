@@ -95,5 +95,6 @@ def SearchAction(browser, nid, dob) -> str:
     """
     Search the Shared NID
     """
+    browser.refresh()
     DoSearch(browser, nid, dob)
     return export_json(ParseSearchResult(browser))

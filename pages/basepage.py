@@ -1,6 +1,9 @@
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium import webdriver
+from typing import Tuple
 
 """
 Module Name: base.py
@@ -13,11 +16,11 @@ pages
 
 
 class BasePage(object):
-    def __init__(self, driver, timeout=30):
+    def __init__(self, driver: webdriver, timeout: int = 30) -> None:
         self.driver = driver
         self.timeout = timeout
 
-    def find_element(self, *by_locator):
+    def find_element(self, *by_locator: Tuple[By, str]):
         """
         Find an element in the DOM Tree
         """
@@ -28,7 +31,7 @@ class BasePage(object):
         except AttributeError as e:
             print(e)
 
-    def click(self, by_locator):
+    def click(self, by_locator: Tuple[By, str]) -> None:
         """
         Click an element on the DOM Tree
         """
@@ -37,7 +40,7 @@ class BasePage(object):
         except AttributeError as e:
             print(e)
 
-    def write(self, by_locator, text_to_write):
+    def write(self, by_locator: Tuple[By, str], text_to_write: str) -> None:
         """
         Write to an element on the DOM Tree
         """
@@ -47,7 +50,7 @@ class BasePage(object):
         except TimeoutException as e:
             print(e)
 
-    def get_element_text(self, by_locator):
+    def get_element_text(self, by_locator: Tuple[By, str]) -> str:
         """
         Retrieve the 'VALUE' from an element of DOM Tree
         """

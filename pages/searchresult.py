@@ -1,3 +1,6 @@
+from typing import Dict, Tuple
+
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 from .basepage import BasePage
@@ -9,7 +12,7 @@ class SearchResult(BasePage):
         for parsing all the NID holder information.
     """
     # Names, Occupation, Blood-Group, National ID, Pin
-    BASIC_INFO = {
+    BASIC_INFO: Dict[str, Tuple[By, str]] = {
         "Name(Bangla)": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[2]"),
         "Name(English)": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[4]"),
         "Father Name": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[8]"),
@@ -23,7 +26,7 @@ class SearchResult(BasePage):
     }
 
     # PRESENT ADDRESS SECTION
-    PRESENT_ADDRESS = {
+    PRESENT_ADDRESS: Dict[str, Tuple[By, str]] = {
         "Division": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[16]/div/div[2]"),
         "District": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[16]/div/div[4]"),
         "RMO": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[16]/div/div[6]"),
@@ -43,7 +46,7 @@ class SearchResult(BasePage):
     }
 
     # PERMANENT ADDRESS
-    PERMANENT_ADDRESS = {
+    PERMANENT_ADDRESS: Dict[str, Tuple[By, str]] = {
         "Division": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[2]"),
         "District": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[4]"),
         "RMO": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[6]"),
@@ -62,11 +65,11 @@ class SearchResult(BasePage):
         "Region": (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[30]")
     }
 
-    def __init__(self, driver):
+    def __init__(self, driver: webdriver) -> None:
         super().__init__(driver)
 
     @staticmethod
-    def __is_blank(value) -> bool:
+    def __is_blank(value: str) -> bool:
         """
         A static method don't depend on the class. Just a simple method to 
         do the string verification
@@ -75,33 +78,33 @@ class SearchResult(BasePage):
             return True
         return False
 
-    def __parser(self, data: dict) -> dict:
+    def __parser(self, dict_values: Dict[str, Tuple[By, str]]) -> Dict[str, str]:
         """
         Return a parsed dictionary modeled data
-        :param data: dict
+        :param dict_values: dict
         :return: dict: formatted data of NID Holder information
         """
         information = {}
-        for key, *selector in data.items():
+        for key, *selector in dict_values.items():
             parsed_data = self.get_element_text(*selector)
             if self.__is_blank(parsed_data):
                 parsed_data = None
             information.update({key: parsed_data})
         return information
 
-    def parse_basic_info(self) -> dict:
+    def parse_basic_info(self) -> Dict[str, str]:
         """
         Callable method to get the Basic information of the NID Holder
         """
         return self.__parser(self.BASIC_INFO)
 
-    def parse_present_address(self) -> dict:
+    def parse_present_address(self) -> Dict[str, str]:
         """
         Callable method to get the present address information of the NID Holder
         """
         return self.__parser(self.PRESENT_ADDRESS)
 
-    def parse_permanent_address(self) -> dict:
+    def parse_permanent_address(self) -> Dict[str, str]:
         """
         Callable method to get the permanent address information of the NID holder
         """

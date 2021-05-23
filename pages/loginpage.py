@@ -1,3 +1,5 @@
+from typing import Tuple
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 from .basepage import BasePage
@@ -5,21 +7,21 @@ from .basepage import BasePage
 
 class LoginPage(BasePage):
     # Locator Instance Variables
-    USERNAME = (By.ID, "login-username")
-    PASSWORD = (By.ID, "login-password")
-    LOGIN_BTN = (By.ID, "login-button")
+    USERNAME: Tuple[By, str] = (By.ID, "login-username")
+    PASSWORD: Tuple[By, str] = (By.ID, "login-password")
+    LOGIN_BTN: Tuple[By, str] = (By.ID, "login-button")
 
-    def __init__(self, driver):
+    def __init__(self, driver: webdriver) -> None:
         super().__init__(driver)
 
-    def insert_username(self, username) -> None:
+    def insert_username(self, username: str) -> None:
         """
         Insert the username to login to account
         """
         self.find_element(*self.USERNAME).clear()
         self.write(self.USERNAME, username)
 
-    def insert_password(self, password) -> None:
+    def insert_password(self, password: str) -> None:
         """
         Insert the password to login to account
         """

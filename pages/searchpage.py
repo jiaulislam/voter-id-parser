@@ -1,3 +1,6 @@
+from typing import Tuple
+
+from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,24 +13,24 @@ class SearchPage(BasePage):
     """
     With the help of this class user should able to enter the NID & DOB in the DOM Tree
     """
-    NID_TEXT = (By.ID, "nidVoterInput")
-    DOB_TEXT = (By.ID, "dateOfBirth")
-    SEARCH_BTN = (By.ID, "btnVerify")
+    NID_TEXT: Tuple[By, str] = (By.ID, "nidVoterInput")
+    DOB_TEXT: Tuple[By, str] = (By.ID, "dateOfBirth")
+    SEARCH_BTN: Tuple[By, str] = (By.ID, "btnVerify")
     # below one edge case need to handle if the ID num or DOB is wrong then 
-    RESULT = (By.ID, "//*[@id='result-container']/div[2]/div/div/div")
-    EDGE_CASE = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[30]")
+    RESULT: Tuple[By, str] = (By.ID, "//*[@id='result-container']/div[2]/div/div/div")
+    EDGE_CASE: Tuple[By, str] = (By.XPATH, "//*[@id='result-container']/div[3]/div[1]/div/div[18]/div/div[30]")
 
-    def __init__(self, driver):
+    def __init__(self, driver: webdriver) -> None:
         super().__init__(driver)
 
-    def insert_NID_number(self, nid_number) -> None:
+    def insert_NID_number(self, nid_number: str) -> None:
         """
         Insert the NID number for query
         """
         self.find_element(*self.NID_TEXT).clear()
         self.write(self.NID_TEXT, nid_number)
 
-    def insert_dob(self, date_of_birth) -> None:
+    def insert_dob(self, date_of_birth: str) -> None:
         """
         Insert the Date of birth for query.
 

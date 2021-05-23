@@ -127,4 +127,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Browser session object
 DRIVER = get_browser_window()

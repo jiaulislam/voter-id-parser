@@ -17,8 +17,8 @@ task.
 def initial_task():
     driver = get_browser_window()  # Connect to remote Chrome
     OpenURL(driver, STATIC_DATA.get('URL'))  # Open the Provided URL
-    DoLogin(driver)  # Login to the website
-    GotoNIDVerification(driver)  # Goto the NID Verification Section
+    # DoLogin(driver)  # Login to the website
+    # GotoNIDVerification(driver)  # Goto the NID Verification Section
 
 
 if __name__ == "__main__":
